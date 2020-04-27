@@ -21,7 +21,7 @@ Resources:
             - '/opt/aws/bin/cfn-init -v '
             - '         --stack '
             - !Ref 'AWS::StackName'
-            - '         --resource MyInstance '
+            - '         --resource EC2Instance '
             - '         --region '
             - !Ref 'AWS::Region'
             - |+
@@ -31,11 +31,11 @@ Resources:
             - '/opt/aws/bin/cfn-signal -e $? '
             - '         --stack '
             - !Ref 'AWS::StackName'
-            - '         --resource MyInstance '
+            - '         --resource EC2Instance '
             - '         --region '
             - !Ref 'AWS::Region'
             - |+
-            
+
   InstanceSecurityGroup:
     Type: 'AWS::EC2::SecurityGroup'
     Properties:
