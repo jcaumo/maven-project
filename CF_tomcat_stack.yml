@@ -15,16 +15,27 @@ Resources:
         'Fn::Join':
           - ''
           - - |
-              #!/bin/bash -xe
+              #!/bin/bash -x
             - |
               # Install the files and packages from the metadata
             - '/opt/aws/bin/cfn-init -v '
             - '         --stack '
             - !Ref 'AWS::StackName'
-            - '         --resource EC2Instance '
-#            - '         --configsets InstallAndRun '
+            - '         --resource MyInstance '
             - '         --region '
             - !Ref 'AWS::Region'
+            - |+
+
+            - |
+              # Signal the status from cfn-init
+            - '/opt/aws/bin/cfn-signal -e $? '
+            - '         --stack '
+            - !Ref 'AWS::StackName'
+            - '         --resource MyInstance '
+            - '         --region '
+            - !Ref 'AWS::Region'
+            - |+
+            
   InstanceSecurityGroup:
     Type: 'AWS::EC2::SecurityGroup'
     Properties:
