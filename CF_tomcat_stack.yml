@@ -17,6 +17,9 @@ Resources:
           - - |
               #!/bin/bash -x
             - |
+              set -x
+              exec > >(tee /var/log/user-data.log|logger -t user-data ) 2>&1
+              echo BEGIN
               # Install the files and packages from the metadata
             - '/opt/aws/bin/cfn-init -v '
             - '         --stack '
