@@ -6,7 +6,11 @@ Resources:
        config:
           packages:
             yum:
-              tomcat7: [] 
+              tomcat7: []
+          services:
+            tomcat7:
+              enabled: "true"
+              ensureRunning: "true"
     Properties:
       InstanceType: t2.micro
       ImageId: ami-050e1ec030abb8dde
