@@ -1,13 +1,30 @@
-
 Resources:
   EC2Instance:
     Type: 'AWS::EC2::Instance'
+    Metadata:
+      AWS::CloudFormation::Init: 
+        config: 
+          packages: tomcat7
     Properties:
       InstanceType: t2.micro
       ImageId: ami-050e1ec030abb8dde
       SecurityGroups:
         - !Ref InstanceSecurityGroup
       KeyName: MasterKey
+      UserData: !Base64 
+        'Fn::Join':
+          - ''
+          - - |
+              #!/bin/bash -xe
+            - |
+              # Install the files and packages from the metadata
+            - '/opt/aws/bin/cfn-init -v '
+            - '         --stack '
+            - !Ref 'AWS::StackName'
+            - '         --resource EC2Instance '
+#            - '         --configsets InstallAndRun '
+            - '         --region '
+            - !Ref 'AWS::Region'
   InstanceSecurityGroup:
     Type: 'AWS::EC2::SecurityGroup'
     Properties:
