@@ -3,7 +3,7 @@ pipeline {
     tools {
         maven 'localMaven'
     }
-    
+
     parameters {
          string(name: 'tomcat_dev', defaultValue: '52.64.157.18', description: 'Staging Server')
          string(name: 'tomcat_prod', defaultValue: '13.211.219.112', description: 'Production Server')
@@ -30,6 +30,7 @@ stages{
             parallel{
                 stage ('Deploy to Staging'){
                     steps {
+                        sh "sudo su -"
                         sh "scp -i /tmp/MasterKey.pem **/target/*.war ec2-user@${params.tomcat_dev}:/var/lib/tomcat7/webapps"
                     }
                 }
