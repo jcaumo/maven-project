@@ -30,8 +30,9 @@ stages{
             parallel{
                 stage ('Deploy to Staging'){
                     steps {
-                        sh "sudo su root"
-                        sh "scp -i /tmp/MasterKey.pem **/target/*.war ec2-user@${params.tomcat_dev}:/var/lib/tomcat7/webapps"
+                        // sh "sudo su root"
+                        // sh "scp -i /tmp/MasterKey.pem **/target/*.war ec2-user@${params.tomcat_dev}:/var/lib/tomcat7/webapps"
+                        sh "scp -i /tmp/MasterKey.pem /tmp/testfile ec2-user@${params.tomcat_dev}:/var/lib/tomcat7/webapps"
                     }
                 }
 
