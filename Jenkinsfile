@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'Staging'}
+    agent any
     tools {
         maven 'localMaven'
     }
