@@ -31,7 +31,7 @@ Resources:
           ToPort: '8080'
           CidrIp: 0.0.0.0/0
 
-  EIP_1:
+  EIP1:
     Type: AWS::EC2::EIP
     Properties:
       InstanceId: !Ref EC2Instance
